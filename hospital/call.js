@@ -1,3 +1,4 @@
+import FormData from 'form-data';
 // $('document').ready(
 //     $.ajax({
 //         type: "GET",
@@ -44,6 +45,7 @@ $('#login_sub').on('click',function(event){
                 // setting session variables
                 sessionStorage.message = data['message'];
                 sessionStorage.access_token = data['access_token'];
+                sessionStorage.admin_email = data['email'];
                 // and redirecting to work page
                 window.location.href = 'show.html';
 
@@ -56,38 +58,54 @@ $('#login_sub').on('click',function(event){
 });
 
 $('#add_new').on('click',function(event){
-    let doc_name = $('#doc_id').val();
+    let doc_number = $('#doc_id').val();
     let birth_cer = $('#birth_certificate').val();
     let parent_name = $('#parentName').val();
     let parent_email = $('#parentEmail').val();
     let phone_no = $('#phone_no').val();
+    let admin_email = sessionStorage.getItem('admin_email');
+    let access_token = sessionStorage.getItem('access_token');
+    if(doc_number == ''){
+      give_msg('Enter Doctor Licence Number');
+    }else if(!birth_cer){
+      give_msg('Choose file as birth certificate');
+    }else if(parent_name == ''){
+      give_msg('Enter Parent Name');
+    }else if(parent_email == ''){
+      give_msg("Enter parent's email");
+    }else if(validateEmail(parent_email) == false){
+      give_msg("Enter a valid parent's email")
+    }else if(!phone_no){
+      give_msg('Enter phone number');
+    }else{
+      var fl = new FormData();
+      jQuery.each(jQuery('#file')[0].files, function(i, file) {
+          fl.append('file-'+i, file);
+      });
     $.ajax({
-        type: "GET",
-        url: 'add_route',
+        type: "POST",
+        url: 'login_route.php',
         data: {
-            doc_name: doc_name,
-            birth_cer: birth_cer,
+            access_token: access_token,
+            admin_email: admin_email,
+            doc_number: doc_number,
+            birth_cer: fl,
             parent_name: parent_name,
             parent_email: parent_email,
             phone_no: phone_no
         },
         success: function(data){
             data = JSON.parse(data);
-            if(data['status'] == 200){
-                var userName = "Shekhar Shete";
-                '<%Session["UserName"] = "' + userName + '"; %>';
-                window.location.href = "./main.html";
+            if(data['status'] == 202){
+                sessionStorage.message = data['message'];
+                window.location.href = "./show.html";
                 
-            }else if(data['status'] == 400){
-                $('#msg').html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>${data['message']}</strong> You should check in on some of those fields below.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>`);
+            }else if(data['status'] == 404 || data['status'] == 401){
+                give_msg(data['message']);
             }	
         }
     })
+  }
 });
 
 // var addbtn = document.getElementById('add_new');

@@ -1,0 +1,22 @@
+{
+  "name": "hackolatte",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranaykgupta/hackolatte-ui.git"
+  },
+  "author": "Pranay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pranaykgupta/hackolatte-ui/issues"
+  },
+  "homepage": "https://github.com/pranaykgupta/hackolatte-ui#readme",
+  "dependencies": {
+    "form-data": "^3.0.0"
+  }
+}
