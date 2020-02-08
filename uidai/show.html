@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hospital | Show</title>
+    <title>UIDAI | Show</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -12,8 +12,8 @@
     crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">HOSPITAL</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">UIDAI</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,43 +26,74 @@
             <li class="nav-item">
               <a class="nav-link" href="add.html">Add a new one</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 2</a>
+            <li class="nav-item pull-right">
+                <a class="nav-link" href="#">Logout</a>
               </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
           </ul>
         </div>
       </nav>
       <div class="container">
-          <h2 class="mb-5">Showing all data</h2>
+          <!-- set date to approve modal -->
+        <div class="modal fade" id="setDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group">
+                  <input type="text" id="req_id" name="req_id" value="" hidden>
+                </div>
+                <div class="form-group">
+                    <label for="sch_date">Select date to schedule verification</label>
+                  <input type="date" name="sch_date" class="form-control" id="sch_date">
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <h2 class="mb-5 text-center">Pending Requests</h2>
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Name of person</h5>
-                <small>3 days ago: Date</small>
-                
+                <h5 class="mb-1">Name of person</h5>               
               </div>
               <p class="mb-1">Doctor Licence</p>
               <p>3 days ago: Saved date</p>
+              <p>3 days ago: Date</p>
               <img src="https://picsum.photos/400" alt="BirthCertificate">
+              <button class="btn btn-success" data-toggle="modal" data-target="#setDate">Approve</button>
+              <button class="btn btn-danger">Decline</button>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-              </div>
-              <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-              <small class="text-muted">Donec id elit non mi porta.</small>
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name of person</h5>               
+                  </div>
+                  <p class="mb-1">Doctor Licence</p>
+                  <p>3 days ago: Saved date</p>
+                  <p>3 days ago: Date</p>
+                  <img src="https://picsum.photos/400" alt="BirthCertificate">
+                  <button class="btn btn-success">Approve</button>
+                  <button class="btn btn-danger">Decline</button>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-              </div>
-              <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-              <small class="text-muted">Donec id elit non mi porta.</small>
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name of person</h5>               
+                  </div>
+                  <p class="mb-1">Doctor Licence</p>
+                  <p>3 days ago: Saved date</p>
+                  <p>3 days ago: Date</p>
+                  <img src="https://picsum.photos/400" alt="BirthCertificate">
+                  <button class="btn btn-success">Approve</button>
+                  <button class="btn btn-danger">Decline</button>
             </a>
           </div>
     </div>
@@ -87,6 +118,8 @@
                                                 </a>`
                                             );
                     });
+                }else if(data['status'] == 400){
+                    $('#content').append(`NO data found`);
                 }
             }
             
