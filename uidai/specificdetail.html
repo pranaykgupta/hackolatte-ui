@@ -34,47 +34,18 @@
         </div>
       </nav>
       <div class="container con">
-        <h3 class="mb-3 text-center">Context of health : Title</h3>
+        <h3 class="mb-3 text-center" id="main_title">Context of health : Title</h3>
         <hr>
-        <ul class="list-group">
+        <ul class="list-group" id="main_content">
             <li class="list-group-item">Doctor Licence Number</li>
             <li class="list-group-item">Type</li>
             <li class="list-group-item">Issue Time</li>
             <li class="list-group-item">Some other Details</li>
             <li class="list-group-item">various other details</li>
             <li class="list-group-item"><img src="https://picsum.photos/400" alt="Document Photo"></li>
-            
-          </ul>
+        </ul>
     </div>
-    <script type="text/javascript">
-    //     $('document').ready(
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "get_router",
-    //         success: function(data){
-    //             data = JSON.parse(data);
-    //             if(data['status']==200){
-    //                 data['values'].forEach((element,index) => {
-    //                     $('#content').append(`<a href="#" class="list-group-item list-group-item-action">
-    //                                             <div class="d-flex w-100 justify-content-between">
-    //                                                 <h5 class="mb-1">${element['name']}</h5>
-    //                                                 <small>${element['date']}</small>
-                                                    
-    //                                             </div>
-    //                                             <p class="mb-1">Doctor Licence</p>
-    //                                             <p>${element['saveddate']} days ago: </p>
-    //                                             <img src="${element['certificate']}" alt="BirthCertificate">
-    //                                             </a>`
-    //                                         );
-    //                 });
-    //             }else if(data['status'] == 400){
-    //                 $('#content').append(`NO data found`);
-    //             }
-    //         }
-            
-    //     })
-    // );
-    </script>
+    <script src="./specific.js"></script>
     <script type="text/javascript">
       if(sessionStorage.getItem('access_token') == null){
         window.location.href = './login.html';
