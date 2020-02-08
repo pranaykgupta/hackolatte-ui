@@ -40,6 +40,7 @@ function doSubmit(){
 
    // Http Request  
    var request = new XMLHttpRequest();
+  //  request.responseType = 'json';
    //request.open('POST', "http://localhost:8080/testMultipart");
    //request.send(formData);
    //console.log(request.response);
