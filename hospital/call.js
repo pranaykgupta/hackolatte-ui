@@ -1,4 +1,3 @@
-import FormData from 'form-data';
 // $('document').ready(
 //     $.ajax({
 //         type: "GET",
@@ -30,30 +29,39 @@ $('#login_sub').on('click',function(event){
       give_msg("Enter valid email id!");
     }
     else{
+      console.log()
     let email = $('#email_id').val();
     let password = $('#pass').val();
-    $.ajax({
-        type: "POST",
-        url: "login_route.php",
-        data: {
-            email: email,
-            password: password
-        },
-        success: function(data){
-            data = JSON.parse(data);
-            if(data['status']==202){
-                // setting session variables
-                sessionStorage.message = data['message'];
-                sessionStorage.access_token = data['access_token'];
-                sessionStorage.admin_email = data['email'];
-                // and redirecting to work page
-                window.location.href = 'show.html';
+    const url = 'http://192.168.137.220:3000/hospi/login';
+    const data = {
+      email: email,
+      password: password
+    }
+    fetch(url)
+    .then(data => {return data.json()})
+    .then(res => {console.log(res)})
+    // $.ajax({
+    //     type: "POST",
+    //     url: "http://192.168.137.220:3000/hospi/login",
+    //     data: {
+    //         email: email,
+    //         password: password
+    //     },
+    //     success: function(data){
+    //         data = JSON.parse(data);
+    //         if(data['status']==202){
+    //             // setting session variables
+    //             sessionStorage.message = data['message'];
+    //             sessionStorage.access_token = data['access_token'];
+    //             sessionStorage.admin_email = data['email'];
+    //             // and redirecting to work page
+    //             window.location.href = 'show.html';
 
-            }else if(data['status'] == 401 || data['status'] == 422){
-              give_msg(data['message']);
-            }
-        }
-    });
+    //         }else if(data['status'] == 401 || data['status'] == 422){
+    //           give_msg(data['message']);
+    //         }
+    //     }
+    // });
     }
 });
 

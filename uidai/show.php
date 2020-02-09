@@ -35,13 +35,7 @@
       <div class="container">          
           <h2 class="mb-5 text-center">Pending Requests</h2>
         <div class="list-group" id="main_content">
-          <a href="#" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">UID: fliruruo486873</h5>      
-              <p>Date: 9 feb</p>         
-            </div>
-            <button class="btn btn-primary" data-id="ldfskjf37r983">Respond</button>
-          </a>
+          <?php include './showpendreq.php'?>
         </div>
     </div>
     <script type="text/javascript">
@@ -49,52 +43,6 @@
         sessionStorage.admin_rid = $(this)[0].dataset.id;
         window.location.href = 'adminres.html';
       });
-    </script>
-    <script type="text/javascript">
-      let admin_email = sessionStorage.getItem('admin_email');
-      let access_token = sessionStorage.getItem('access_token');
-      const formData = new FormData();
-      const url = "http://192.168.137.220:3000/uidai/getRequests";
-      formData.append("admin_email", admin_email);
-      formData.append("access_token", access_token);
-      // const myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-      fetch(url, {
-      method: "POST",
-      // headers: myHeaders,
-      mode: "no-cors",
-      body: formData
-      })
-      .then(result => { return result.json()})
-      .then(res => {console.log(res)})
-      .catch(error => console.log(error));
-      // getReq();
-      async function getReq(){
-        let admin_email = sessionStorage.getItem('admin_email');
-      let access_token = sessionStorage.getItem('access_token');
-      const formData = new FormData();
-      const url = "http://192.168.137.220:3000/uidai/getRequests";
-      formData.append("admin_email", admin_email);
-      formData.append("access_token", access_token);
-      // const myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-      let response = await fetch(url, {
-      method: "POST",
-      // headers: myHeaders,
-      mode: "no-cors",
-      body: formData
-      });
-      
-      let result = await response.json();
-      alert(result);
-      // .then(result => {
-      //   console.log("Success:", result);
-      // })
-      // .catch(error => {
-      //   console.error("Error:", error);
-      // });
-      // console.log(result);
-      }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
