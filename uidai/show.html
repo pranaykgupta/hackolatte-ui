@@ -32,102 +32,70 @@
           </ul>
         </div>
       </nav>
-      <div class="container">
-          <!-- set date to approve modal -->
-        <div class="modal fade" id="setDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                <div class="form-group">
-                  <input type="text" id="req_id" name="req_id" value="" hidden>
-                </div>
-                <div class="form-group">
-                    <label for="sch_date">Select date to schedule verification</label>
-                  <input type="date" name="sch_date" class="form-control" id="sch_date">
-                </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+      <div class="container">          
           <h2 class="mb-5 text-center">Pending Requests</h2>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Name of person</h5>               
-              </div>
-              <p class="mb-1">Doctor Licence</p>
-              <p>3 days ago: Saved date</p>
-              <p>3 days ago: Date</p>
-              <img src="https://picsum.photos/400" alt="BirthCertificate">
-              <button class="btn btn-success" data-toggle="modal" data-target="#setDate">Approve</button>
-              <button class="btn btn-danger">Decline</button>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name of person</h5>               
-                  </div>
-                  <p class="mb-1">Doctor Licence</p>
-                  <p>3 days ago: Saved date</p>
-                  <p>3 days ago: Date</p>
-                  <img src="https://picsum.photos/400" alt="BirthCertificate">
-                  <button class="btn btn-success">Approve</button>
-                  <button class="btn btn-danger">Decline</button>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name of person</h5>               
-                  </div>
-                  <p class="mb-1">Doctor Licence</p>
-                  <p>3 days ago: Saved date</p>
-                  <p>3 days ago: Date</p>
-                  <img src="https://picsum.photos/400" alt="BirthCertificate">
-                  <button class="btn btn-success">Approve</button>
-                  <button class="btn btn-danger">Decline</button>
-            </a>
-          </div>
+        <div class="list-group" id="main_content">
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">UID: fliruruo486873</h5>      
+              <p>Date: 9 feb</p>         
+            </div>
+            <button class="btn btn-primary" data-id="ldfskjf37r983">Respond</button>
+          </a>
+        </div>
     </div>
     <script type="text/javascript">
-        $('document').ready(
-        $.ajax({
-            type: "GET",
-            url: "get_router",
-            success: function(data){
-                data = JSON.parse(data);
-                if(data['status']==200){
-                    data['values'].forEach((element,index) => {
-                        $('#content').append(`<a href="#" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">${element['name']}</h5>
-                                                    <small>${element['date']}</small>
-                                                    
-                                                </div>
-                                                <p class="mb-1">Doctor Licence</p>
-                                                <p>${element['saveddate']} days ago: </p>
-                                                <img src="${element['certificate']}" alt="BirthCertificate">
-                                                </a>`
-                                            );
-                    });
-                }else if(data['status'] == 400){
-                    $('#content').append(`NO data found`);
-                }
-            }
-            
-        })
-    );
+      $('.btn.btn-primary').on('click',function(){
+        sessionStorage.admin_rid = $(this)[0].dataset.id;
+        window.location.href = 'adminres.html';
+      });
     </script>
-    <script src="call.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      let admin_email = sessionStorage.getItem('admin_email');
+      let access_token = sessionStorage.getItem('access_token');
+      const formData = new FormData();
+      const url = "http://192.168.137.220:3000/uidai/getRequests";
+      formData.append("admin_email", admin_email);
+      formData.append("access_token", access_token);
+      // const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      fetch(url, {
+      method: "POST",
+      // headers: myHeaders,
+      mode: "no-cors",
+      body: formData
+      })
+      .then(result => { return result.json()})
+      .then(res => {console.log(res)})
+      .catch(error => console.log(error));
+      // getReq();
+      async function getReq(){
+        let admin_email = sessionStorage.getItem('admin_email');
+      let access_token = sessionStorage.getItem('access_token');
+      const formData = new FormData();
+      const url = "http://192.168.137.220:3000/uidai/getRequests";
+      formData.append("admin_email", admin_email);
+      formData.append("access_token", access_token);
+      // const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      let response = await fetch(url, {
+      method: "POST",
+      // headers: myHeaders,
+      mode: "no-cors",
+      body: formData
+      });
+      
+      let result = await response.json();
+      alert(result);
+      // .then(result => {
+      //   console.log("Success:", result);
+      // })
+      // .catch(error => {
+      //   console.error("Error:", error);
+      // });
+      // console.log(result);
+      }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
