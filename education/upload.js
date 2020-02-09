@@ -22,30 +22,36 @@
 //   });
 // });
 
-function doSubmit(){
-
-  let uid = $('#education_uid').val();
+function doSubmit() {
+  let uid = $("#education_uid").val();
   let type = $("input[name='education_certificate_type_radio']:checked").val();
-  
-  // Form Data
-  var formData = new FormData();
 
   var fileSelect = document.getElementById("education_certificate");
-  if(fileSelect.files && fileSelect.files.length == 1){
-   var file = fileSelect.files[0]
-   formData.set("file", file , file.name);
-   formData.set("uid", uid );
-   formData.set("type", type);
-   alert(uid+type+file.name);
-
-   // Http Request  
-   var request = new XMLHttpRequest();
-  //  request.responseType = 'json';
-   //request.open('POST', "http://localhost:8080/testMultipart");
-   //request.send(formData);
-   //console.log(request.response);
+  let filess = "";
+  if (fileSelect.files && fileSelect.files.length == 1) {
+    filess = fileSelect.files[0];
+  } else {
+    filess = "nothing";
   }
-  else{
-    alert('No file selected');
+  if (!uid && !type) {
+    var formData = new FormData();
+    formData.append("access_token", "");
+    formData.append("uid", uid);
+    formData.append("type", type);
+    formData.append("edu_cert", filess);
+
+    fetch("http://192.168.137.220:3000/edu/addQualification", {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    })
+      .then(result => {
+        console.log("Success:", result.body);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  } else {
+    alert("Enter values");
   }
 }
