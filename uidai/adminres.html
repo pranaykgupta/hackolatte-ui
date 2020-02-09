@@ -52,7 +52,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-primary" id="accept">Save changes</button>
                 </div>
               </div>
             </div>
@@ -65,7 +65,7 @@
                 <h5 class="mb-1">UID: fliruruo486873</h5>      
                 <p>Date: 9 feb</p>         
               </div>
-              <button class="btn btn-success" id="accept" data-toggle="modal" data-target="#setDate">Approve</button>
+              <button class="btn btn-success" data-toggle="modal" data-target="#setDate">Approve</button>
               <button class="btn btn-danger" id="dec">Decline</button>
             </a>
         </div>
@@ -74,21 +74,21 @@
         let access_token = sessionStorage.getItem('access_token');
         let admin_email = sessionStorage.getItem('admin_email');
       $('#dec').on('click',function(){
-          const url='';
-          const formData = new FormData();
-        formData.append("admin_email", "abc3@gmail.com");
-        formData.append( "access_token", access_token);
-        formData.append("status", -1);
+            const url='';
+            const formData = new FormData();
+            formData.append("admin_email", "abc3@gmail.com");
+            formData.append( "access_token", access_token);
+            formData.append("status", -1);
 
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-        fetch("http://192.168.137.220:3000/hospi/generate", {
-            method: "POST",
-            headers: myHeaders,
-            mode: "no-cors",
-            body: formData
-        })
+            fetch("http://192.168.137.220:3000/hospi/generate", {
+                method: "POST",
+                headers: myHeaders,
+                mode: "no-cors",
+                body: formData
+            })
             .then(result => {
             console.log("Success:", result);
             })
@@ -126,7 +126,6 @@
         })
     );
     </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
