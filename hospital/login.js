@@ -26,20 +26,22 @@ function give_msg(message){
     const formData = new FormData();
     let email = $('#email_id').val();
     let password = $('#pass').val();
-    const url = "http://192.168.137.220:3000/hospi/login";
-    formData.append("email", email);
-    formData.append("password", password);
+    const url = "http://192.168.137.220:3000/hospi/login?email=abc3@gmail.com&password=11111111";
+    // formData.append("email", email);
+    // formData.append("password", password);
     // const myHeaders = new Headers();
     // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     fetch(url, {
-    method: "POST",
+    method: "GET",
     // headers: myHeaders,
     mode: "no-cors",
-    body: formData
     })
-    .then(result => {
-      console.log("Success:", result);
+    .then( response => {
+      console.log(response[message]);
     })
+    // .then(result => {
+    //   console.log("Success:", result);
+    // })
     .catch(error => {
       console.error("Error:", error);
     });

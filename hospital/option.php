@@ -34,39 +34,12 @@
           </ul>
         </div>
       </nav>
-      <div class="container con">
-        <h2 class="mb-5 text-center">Add a persons birth certificate</h2>
-        <div id="msg"></div>
-        <div class="form-group">
-            <label for="doc_id">Doctor License ID</label>
-            <input type="text" class="form-control" id="doc_id" >
-        </div>
-        <div class="form-group">
-            <label for="birth_certificate">Birth Certificate</label>
-            <input type="file" class="form-control" id="birth_certificate" >
-        </div>
-        <div class="form-group">
-            <label for="parentName">Parent Name</label>
-            <input type="text" class="form-control" id="parentName" >
-        </div>
-        <div class="form-group">
-          <label for="parentAddress">Parent Address</label>
-          <input type="text" class="form-control" id="parentAddress" >
-        </div>
-        <div class="form-group">
-          <label for="parentEmail">Parent Email address</label>
-          <input type="email" class="form-control" id="parentEmail" aria-describedby="emailHelp">
-        </div>
-        <div class="form-group">
-          <label for="phone_no">Parent Phone number</label>
-          <input type="number" class="form-control" id="phone_no">
-        </div>
-        <button class="btn btn-primary" id="add_new">Submit</button>
+      <div class="container con text-center">
+      <a href="./add.php"><button class="btn btn-primary" >Add Identity</button></a>
+      <a href="./addreport.php"><button class="btn btn-primary" >Add report</button></a>
     </div>
     <script type="text/javascript">
-      if(sessionStorage.getItem('access_token') == null){
-        window.location.href = './login.html';
-      }
+      
     </script>
     <script src="call.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
