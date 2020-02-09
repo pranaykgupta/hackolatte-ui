@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>UIDAI | Show</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main.css">
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -23,32 +24,78 @@
             <li class="nav-item active">
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="add.html">Add a new one</a>
-            </li>
             <li class="nav-item pull-right">
                 <a class="nav-link" href="#">Logout</a>
               </li>
           </ul>
         </div>
       </nav>
-      <div class="container">          
-          <h2 class="mb-5 text-center">Pending Requests</h2>
+      <div class="container">
+          <!-- set date to approve modal -->
+        <div class="modal fade" id="setDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group">
+                  <input type="text" id="req_id" name="req_id" value="" hidden>
+                </div>
+                <div class="form-group">
+                    <label for="sch_date">Select date to schedule verification</label>
+                  <input type="date" name="sch_date" class="form-control" id="sch_date">
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+        </div>
+          
+        <h2 class="mb-5 text-center">User Details</h2>
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">UID: fliruruo486873</h5>      
                 <p>Date: 9 feb</p>         
               </div>
-              <button class="btn btn-primary" data-id="ldfskjf37r983">Respond</button>
+              <button class="btn btn-success" id="accept" data-toggle="modal" data-target="#setDate">Approve</button>
+              <button class="btn btn-danger" id="dec">Decline</button>
             </a>
-          </div>
+        </div>
     </div>
     <script type="text/javascript">
-      $('.btn.btn-primary').on('click',function(){
-        sessionStorage.admin_rid = $(this)[0].dataset.id;
-        window.location.href = 'adminres.html';
-      });
+        let access_token = sessionStorage.getItem('access_token');
+        let admin_email = sessionStorage.getItem('admin_email');
+      $('#dec').on('click',function(){
+          const url='';
+          const formData = new FormData();
+        formData.append("admin_email", "abc3@gmail.com");
+        formData.append( "access_token", access_token);
+        formData.append("status", -1);
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        fetch("http://192.168.137.220:3000/hospi/generate", {
+            method: "POST",
+            headers: myHeaders,
+            mode: "no-cors",
+            body: formData
+        })
+            .then(result => {
+            console.log("Success:", result);
+            })
+            .catch(error => {
+            console.error("Error:", error);
+            });
+            });
     </script>
     <script type="text/javascript">
         $('document').ready(
@@ -79,7 +126,6 @@
         })
     );
     </script>
-    <script src="call.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
