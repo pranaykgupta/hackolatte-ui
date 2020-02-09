@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+  session_start();
+  ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="./option.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="show.html">Show pending requests</a>
@@ -37,6 +40,12 @@
       <div class="container con">
         <h2 class="mb-5 text-center">Add a persons Medical Report</h2>
         <div id="msg"></div>
+        <input type="hidden" value="<?php echo $_SESSION['access_token'];?>" name='access_token' id="access_token" >
+        <input type="hidden" value="<?php echo $_SESSION['email'];?>" name='admin_email' id="admin_email" >
+        <div class="form-group">
+            <label for="uid">UID</label>
+            <input type="text" class="form-control" id="uid" >
+        </div>
         <div class="form-group">
             <label for="doc_id">Doctor License ID</label>
             <input type="text" class="form-control" id="doc_id" >
@@ -49,7 +58,7 @@
             <label for="type">Type of medical injury</label>
             <input type="text" class="form-control" id="type" >
         </div>
-        <button class="btn btn-primary" id="add_new">Submit</button>
+        <button class="btn btn-primary" id="add_report">Submit</button>
     </div>
     <script type="text/javascript">
     //   if(sessionStorage.getItem('access_token') == null){

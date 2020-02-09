@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+  session_start();
+  ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,25 +41,32 @@
         <div class="list-group" id="main_content">
             <a href="#" class="list-group-item list-group-item-action mb-3">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Context of health</h5>               
-                <button class="btn btn-primary" data-id="12345">Show More</button>
+                <h5 class="mb-1">Name: <?php echo $_SESSION['name']; ?></h5>     
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action mb-3">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">Context of health</h5>               
-                  <button class="btn btn-primary" data-id="12345">Show More</button>
+                  <h5 class="mb-1">Date of Birth: <?php echo $_SESSION['dob']; ?></h5>
                 </div>
               </a>
               <a href="#" class="list-group-item list-group-item-action mb-3">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">Context of health</h5>               
-                  <button class="btn btn-primary" data-id="12345">Show More</button>
+                  <h5 class="mb-1">Permanent Address: <?php echo $_SESSION['p_address']; ?></h5>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action mb-3">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Current Address: <?php echo $_SESSION['c_address']; ?></h5>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action mb-3">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Phone Number: <?php echo $_SESSION['phone_number']; ?></h5>
                 </div>
               </a>
           </div>
     </div>
-    <script src="./showcatd.js"></script>
+    <script src="./showcatd.js"></script> 
     <!-- <script type="text/javascript">
       if(sessionStorage.getItem('access_token') == null){
         window.location.href = './login.html';

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
     crossorigin="anonymous"></script>
 </head>
 <body>
@@ -33,9 +33,12 @@
     <div class="container con">
           <h2 class="mb-5 text-center">Select One out of the following</h2>
           <div class="list-group">
-            <button type="button" id="personal" class="list-group-item list-group-item-action">
+            <form action="showcatd.php" method="POST">
+              <input type="hidden" value="personal">
+            <button type="submit" id="personal" class="list-group-item list-group-item-action">
               <h3>Personal Details</h3>
             </button>
+          </form>
             <button type="button" id="edu" class="list-group-item list-group-item-action"><h3>Educational Details</h3></button>
             <button type="button" id="health" class="list-group-item list-group-item-action"><h3>Health Details</h3></button>
           </div>
